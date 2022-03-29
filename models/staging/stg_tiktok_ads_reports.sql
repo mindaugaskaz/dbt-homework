@@ -17,7 +17,7 @@ with raw_tiktok_campaigns_parsed as (
     cast(json_query(_airbyte_data,'$.metrics.conversion') as int) as conversions,
     cast(json_query(_airbyte_data,'$.metrics.impressions') as int) as impressions,
     cast(json_query(_airbyte_data,'$.metrics.clicks') as int) as clicks
-    FROM `homework-data2020.raw._airbyte_raw_tiktok_ads_reports`
+    FROM {{ source('tiktok_airbyte','_airbyte_raw_tiktok_ads_reports') }}
 )
 select *
 from raw_tiktok_campaigns_parsed
