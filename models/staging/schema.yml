@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_tiktok_ads_reports
+    columns: 
+      - name: pulled_at
+        tests:
+          - not_null
+      - name: ad_id
+        tests:
+          - not_null
+      - name: stat_time_day
+        tests:
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
+
+  - name: stg_tiktok_data_deduplicated
+    columns: 
+      - name: pulled_at
+        tests:
+          - not_null
+      - name: ad_id
+        tests:
+          - not_null
+          - unique
+      - name: stat_time_day
+        tests:
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
