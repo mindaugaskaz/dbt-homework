@@ -1,5 +1,6 @@
 {{ config(
     materialized='incremental'
+
     ) 
 }}
 
@@ -21,4 +22,9 @@ with raw_tiktok_campaigns_parsed as (
 )
 select *
 from raw_tiktok_campaigns_parsed
+{% if is_incremental() %}
+
+    where pulled_at > (select max(pulled_at) from {{ this }})
+
+{% endif %}
 

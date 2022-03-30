@@ -33,9 +33,6 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   homework_data2020:
-    # Applies to all files under models/example/
-    example:
-      materialized: view
     staging: 
       materialized: incremental
     marts:

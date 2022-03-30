@@ -1,5 +1,6 @@
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    unique_key = 'unique_id'
     ) 
 }}
 
@@ -33,7 +34,8 @@ campaigns_with_metrics as (
     from aggregated_by_campaign_and_date
 )
 select 
-stat_time_day,
+    concat(stat_time_day,'-',campaign_id) as unique_id,
+    stat_time_day,
     campaign_id,
     campaign_name,
     impressions,
@@ -43,3 +45,8 @@ stat_time_day,
     round(cpc,2) as cpc,
     round(cpa,2) as cpa
 from campaigns_with_metrics
+{% if is_incremental() %}
+
+    where stat_time_day >= (select max(stat_time_day) from {{ this }})
+
+{% endif %}
