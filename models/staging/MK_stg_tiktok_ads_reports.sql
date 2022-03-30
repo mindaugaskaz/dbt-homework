@@ -8,6 +8,7 @@
 with raw_tiktok_campaigns_parsed as (
     SELECT 
     cast(_airbyte_emitted_at as datetime) as pulled_at,
+    _airbyte_ab_id as airbyte_id,
     json_extract(_airbyte_data,'$.dimensions.ad_id') as ad_id,
     cast(json_extract_scalar(_airbyte_data,'$.dimensions.stat_time_day') as datetime) as stat_time_day,
     json_query(_airbyte_data,'$.metrics.adgroup_id') as adgroup_id,
@@ -27,4 +28,3 @@ from raw_tiktok_campaigns_parsed
     where pulled_at > (select max(pulled_at) from {{ this }})
 
 {% endif %}
-
