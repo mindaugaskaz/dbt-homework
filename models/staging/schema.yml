@@ -6,6 +6,9 @@ models:
       - name: pulled_at
         tests:
           - not_null
+      - name: airbyte_id
+        tests:
+          - not_null
       - name: ad_id
         tests:
           - not_null
@@ -21,13 +24,16 @@ models:
 
   - name: MK_stg_tiktok_data_deduplicated
     columns: 
+      - name: unique_id
+        tests:
+          - not_null
+          - unique
       - name: pulled_at
         tests:
           - not_null
       - name: ad_id
         tests:
           - not_null
-          - unique
       - name: stat_time_day
         tests:
           - not_null
@@ -35,5 +41,8 @@ models:
         tests:
           - not_null
       - name: campaign_name
+        tests:
+          - not_null
+      - name: adgroup_id
         tests:
           - not_null

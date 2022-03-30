@@ -1,6 +1,6 @@
 {{ config(
     materialized='incremental',
-    unique_key='ad_id'
+    unique_key='unique_id'
 
     ) 
 }}
@@ -12,10 +12,12 @@ with tiktok_campaign_data as (
 tiktok_capmaign_data_duplicates_identified as (
     select
     *,
-    row_number() over (partition by ad_id, stat_time_day order by pulled_at desc) as rn
+    row_number() over (partition by ad_id, stat_time_day, campaign_id, adgroup_id order by pulled_at desc) as rn
     from tiktok_campaign_data
 )
-select *
+select 
+concat(ad_id, stat_time_day, campaign_id, adgroup_id) as unique_id,
+*
 from tiktok_capmaign_data_duplicates_identified
 where rn = 1
 {% if is_incremental() %}
