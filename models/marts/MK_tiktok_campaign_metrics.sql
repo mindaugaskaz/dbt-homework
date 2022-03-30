@@ -6,7 +6,7 @@
 
 with tiktok_campaign_data as (
     select *
-    from {{ ref('stg_tiktok_data_deduplicated') }}
+    from {{ ref('MK_stg_tiktok_data_deduplicated') }}
 ),
 aggregated_by_campaign_and_date as (
     select 

@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: stg_tiktok_ads_reports
+  - name: MK_stg_tiktok_ads_reports
     columns: 
       - name: pulled_at
         tests:
@@ -19,7 +19,7 @@ models:
         tests:
           - not_null
 
-  - name: stg_tiktok_data_deduplicated
+  - name: MK_stg_tiktok_data_deduplicated
     columns: 
       - name: pulled_at
         tests:

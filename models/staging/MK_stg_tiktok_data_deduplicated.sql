@@ -7,7 +7,7 @@
 
 with tiktok_campaign_data as (
     select *
-    from {{ ref('stg_tiktok_ads_reports') }}
+    from {{ ref('MK_stg_tiktok_ads_reports') }}
 ),
 tiktok_capmaign_data_duplicates_identified as (
     select
