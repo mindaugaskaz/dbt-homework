@@ -1,5 +1,7 @@
 {{ config(
-    materialized='incremental'
+    materialized='incremental',
+    unique_key='ad_id'
+
     ) 
 }}
 
@@ -16,3 +18,8 @@ tiktok_capmaign_data_duplicates_identified as (
 select *
 from tiktok_capmaign_data_duplicates_identified
 where rn = 1
+{% if is_incremental() %}
+
+    and pulled_at > (select max(pulled_at) from {{ this }})
+
+{% endif %}
