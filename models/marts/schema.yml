@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: tiktok_campaign_metrics
+  - name: MK_tiktok_campaign_metrics
     columns: 
       - name: unique_id
         tests:
