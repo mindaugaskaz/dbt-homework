@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: tiktok_campaign_metrics
+    columns: 
+      - name: unique_id
+        tests:
+          - not_null
+          - unique
+      - name: stat_time_day
+        tests:
+          - not_null
+      - name: campaign_id
+        tests:
+          - not_null
+      - name: campaign_name
+        tests:
+          - not_null
